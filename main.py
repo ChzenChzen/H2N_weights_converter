@@ -13,7 +13,7 @@ def max_offsuit(cards_matrix):
         line_number += 1
         for card_weight in cards_matrix_line[:line_number]:
             offsuits.append(card_weight)
-    print(offsuits)
+    return max(offsuits)
 
 
 def convert_into_percents(weights):
@@ -34,4 +34,4 @@ def write_crev_format_in_excel():
 
 weights = h2n_text_parser("input.txt")
 
-max_offsuit(weights)
+print(max_offsuit(weights))
