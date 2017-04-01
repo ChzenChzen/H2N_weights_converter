@@ -6,11 +6,14 @@ def h2n_text_parser(filename):
 
 def max_offsuit(cards_matrix):
     """get max value from offsuit cards"""
+    offsuits = []
+    line_number = 0
+    # take only values of offsuits cards from matrix
     for cards_matrix_line in cards_matrix[1:]:
-        line_number = 0
+        line_number += 1
         for card_weight in cards_matrix_line[:line_number]:
-            line_number += 1
-            print(card_weight)
+            offsuits.append(card_weight)
+    print(offsuits)
 
 
 def convert_into_percents(weights):
