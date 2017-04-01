@@ -7,19 +7,30 @@ def h2n_text_parser(filename):
 def offsuit_cards(cards_matrix):
     """returns list of offsuit cards"""
     offsuits = []
-    line_number = 0
+    offsuit_cards_length = 0
     # take only values of offsuits cards from matrix
     for cards_matrix_line in cards_matrix[1:]:
-        line_number += 1
-        for card_weight in cards_matrix_line[:line_number]:
+        offsuit_cards_length += 1
+        for card_weight in cards_matrix_line[:offsuit_cards_length]:
             offsuits.append(card_weight)
     return offsuits
 
 
+def suit_cards(cards_matrix):
+    """returns list of suit cards"""
+    suits = []
+    suit_cards_length = 0
+    # take only values of suits cards from matrix
+    for cards_matrix_line in cards_matrix[:-1]:
+        suit_cards_length += 1
+        for card_weight in cards_matrix_line[suit_cards_length:]:
+            suits.append(card_weight)
+    return suits
+
 def convert_into_percents_offsuits(cards_matrix):
     """converts only offsuits cards into percents from card matrix"""
     max_offsuit_cards_value = max(offsuit_cards(cards_matrix))
-    percent_value_offsuits = [offsuit_card_value / max_offsuit_cards_value for offsuit_card_value in
+    percent_value_offsuits = [round(offsuit_card_value / max_offsuit_cards_value, 2) for offsuit_card_value in
                               offsuit_cards(cards_matrix)]
     return percent_value_offsuits
 
@@ -41,4 +52,4 @@ def write_crev_format_in_excel():
 
 
 weights = h2n_text_parser("input.txt")
-print(convert_into_percents_offsuits(weights))
+print(suit_cards(weights))
