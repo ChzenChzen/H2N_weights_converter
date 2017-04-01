@@ -1,7 +1,8 @@
 def h2n_text_parser(filename):
     """parses text from file"""
-    lines = [[int(weight) for weight in line.split()] for line in open(filename)]  # create hand matrix from file
-    return lines
+    weights = [[int(weight) for weight in line.split()] for line in open(filename)]  # create hand matrix from file
+    return weights
+
 
 def convert_into_percents():
     """converts weights of raw h2n into percents"""
