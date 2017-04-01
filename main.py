@@ -4,8 +4,18 @@ def h2n_text_parser(filename):
     return weights
 
 
-def convert_into_percents():
+def max_offsuit(cards_matrix):
+    """get max value from offsuit cards"""
+    for cards_matrix_line in cards_matrix[1:]:
+        line_number = 0
+        for card_weight in cards_matrix_line[:line_number]:
+            line_number += 1
+            print(card_weight)
+
+
+def convert_into_percents(weights):
     """converts weights of raw h2n into percents"""
+    print(weights)
     pass
 
 
@@ -19,6 +29,6 @@ def write_crev_format_in_excel():
     pass
 
 
-print(h2n_text_parser("input.txt"))
+weights = h2n_text_parser("input.txt")
 
-
+max_offsuit(weights)
