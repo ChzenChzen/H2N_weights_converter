@@ -8,7 +8,7 @@ def offsuit_cards(cards_matrix):
     """returns list of offsuit cards"""
     offsuits = []
     offsuit_cards_length = 0
-    # take only values of offsuits cards from matrix
+    # take only values of offsuit cards from matrix
     for cards_matrix_line in cards_matrix[1:]:
         offsuit_cards_length += 1
         for card_weight in cards_matrix_line[:offsuit_cards_length]:
@@ -20,25 +20,25 @@ def suit_cards(cards_matrix):
     """returns list of suit cards"""
     suits = []
     suit_cards_length = 0
-    # take only values of suits cards from matrix
+    # take only values of suit cards from matrix
     for cards_matrix_line in cards_matrix[:-1]:
         suit_cards_length += 1
         for card_weight in cards_matrix_line[suit_cards_length:]:
             suits.append(card_weight)
     return suits
 
-def convert_into_percents_offsuits(cards_matrix):
+
+def pair_cards(cards_matrix):
+    """returns list of pair cards"""
+    pairs = [cards_matrix[i][i] for i in range(len(cards_matrix))]  # take only values of pair cards from matrix
+    return pairs
+
+
+def convert_into_percents(cards_range):
     """converts only offsuits cards into percents from card matrix"""
-    max_offsuit_cards_value = max(offsuit_cards(cards_matrix))
-    percent_value_offsuits = [round(offsuit_card_value / max_offsuit_cards_value, 2) for offsuit_card_value in
-                              offsuit_cards(cards_matrix)]
-    return percent_value_offsuits
-
-
-def convert_into_percents(weights):
-    """converts weights of raw h2n into percents"""
-    print(weights)
-    pass
+    max_cards_range_value = max(cards_range)
+    percent_values = [round(card_value / max_cards_range_value, 2) for card_value in cards_range]
+    return percent_values
 
 
 def convert_into_crev_format():
@@ -52,4 +52,7 @@ def write_crev_format_in_excel():
 
 
 weights = h2n_text_parser("input.txt")
-print(suit_cards(weights))
+
+print(convert_into_percents(suit_cards(weights)))
+print(convert_into_percents(offsuit_cards(weights)))
+print(convert_into_percents(pair_cards(weights)))
