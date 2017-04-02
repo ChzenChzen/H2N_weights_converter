@@ -1,6 +1,3 @@
-import pandas as pd
-
-
 def h2n_text_parser(filename):
     """parses text from file"""
     weights = [[int(weight) for weight in line.split()] for line in open(filename)]  # create hand matrix from file
@@ -48,29 +45,6 @@ def show_matrix(matrix):
     for row in matrix:
         print(str(row) + "\n")
 
-
-# def add_offsuit_cards_percents(offsuit_values, cards_matrix):
-#     """add offsuit cards in cards matrix"""
-#     n = 0
-#     for row in cards_matrix:
-#         row[:n] = offsuit_values[:n]
-#         del offsuit_values[:n]
-#         n += 1
-#
-#
-# def add_pair_cards(pair_values, cards_matrix):
-#     """add pair cards in cards matrix"""
-#     for n in range(13):
-#         cards_matrix[n][n] = pair_values[n]
-#
-#
-# def add_suit_cards_percents(suit_values, cards_matrix):
-#     """add suit cards in cards matrix"""
-#     n = 1
-#     for row in cards_matrix:
-#         row[n:] = suit_values[:13 - n]
-#         del suit_values[:13 - n]
-#         n += 1
 
 def convert_into_crev_format():
     """rounds weights of percents  into crev format(5 weights)"""
@@ -134,27 +108,26 @@ def suit_cards(values):
     return suit_cards_dict
 
 data = h2n_text_parser("input.txt")
-# matrix = [['' for x in range(13)] for x in range(13)]  # create empty matrix 13*13
 
 all_cards = dict(**pair_cards(data), **offsuit_cards(data), **suit_cards(data))
 print(all_cards)
-# print(all_cards(data))
 
-# for index,
+range0_19, range20_39, range40_59, range60_79, range80_100 = [], [], [], [], []
 
+for key, value in all_cards.items():
+    if value < 0.2:
+        range0_19.append(key)
+    elif 0.2 <= value < 0.4:
+        range20_39.append(key)
+    elif 0.4 <= value < 0.6:
+        range40_59.append(key)
+    elif 0.6 <= value < 0.8:
+        range60_79.append(key)
+    elif 0.8 <= value <= 1:
+        range80_100.append(key)
 
-
-# add_offsuit_cards_percents(offsuit_cards_in_percent, matrix)
-# add_pair_cards(pair_cards_in_percent, matrix)
-# add_suit_cards_percents(suit_cards_in_percent, matrix)
-#
-# card_labels = ['A', 'K', 'Q', 'J', 'T', '9', '8', '7', '6', '5', '4', '3', '2']
-#
-# df = pd.DataFrame(matrix, columns=card_labels, index=card_labels)
-# print(df)
-#
-# for row in card_labels:
-#     for card in card_labels:
-#         value = df.at[row, card]
-#         if value < 0.2:
-#             print(row, card, value)
+print()
+range_output = '[20]' + ', '.join(range0_19) + '[/20],' + '[40]' + ', '.join(
+    range20_39) + '[/40],' + '[60]' + ', '.join(range40_59) + '[/60],' + '[80]' + ', '.join(
+    range60_79) + '[/80],' + '[100]' + ', '.join(range80_100) + '[/100],'
+print(range_output)
