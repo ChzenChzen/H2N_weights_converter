@@ -110,8 +110,6 @@ def suit_cards(values):
 data = h2n_text_parser("input.txt")
 
 all_cards = dict(**pair_cards(data), **offsuit_cards(data), **suit_cards(data))
-print(all_cards)
-
 range0_19, range20_39, range40_59, range60_79, range80_100 = [], [], [], [], []
 
 for key, value in all_cards.items():
