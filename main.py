@@ -1,5 +1,6 @@
 import pandas as pd
 
+
 def h2n_text_parser(filename):
     """parses text from file"""
     weights = [[int(weight) for weight in line.split()] for line in open(filename)]  # create hand matrix from file
@@ -67,8 +68,8 @@ def add_suit_cards_percents(suit_values, cards_matrix):
     """add suit cards in cards matrix"""
     n = 1
     for row in cards_matrix:
-        row[n:] = suit_values[:n]
-        del suit_values[:n]
+        row[n:] = suit_values[:13 - n]
+        del suit_values[:13 - n]
         n += 1
 
 
@@ -88,10 +89,9 @@ offsuit_cards_in_percent = convert_into_percents(get_offsuit_cards(data))
 pair_cards_in_percent = convert_into_percents(get_pair_cards(data))
 suit_cards_in_percent = convert_into_percents(get_suit_cards(data))
 
-print("p: " + str(pair_cards_in_percent))
-print("o: " + str(offsuit_cards_in_percent))
 
 add_offsuit_cards_percents(offsuit_cards_in_percent, matrix)
 add_pair_cards(pair_cards_in_percent, matrix)
 add_suit_cards_percents(suit_cards_in_percent, matrix)
+print("###################################################################")
 show_matrix(matrix)
