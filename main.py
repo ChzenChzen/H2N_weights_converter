@@ -126,8 +126,9 @@ for key, value in all_cards.items():
     elif 0.8 <= value <= 1:
         range80_100.append(key)
 
-print()
 range_output = '[20]' + ', '.join(range0_19) + '[/20],' + '[40]' + ', '.join(
     range20_39) + '[/40],' + '[60]' + ', '.join(range40_59) + '[/60],' + '[80]' + ', '.join(
-    range60_79) + '[/80],' + '[100]' + ', '.join(range80_100) + '[/100],'
+    range60_79) + '[/80],' + '[100]' + ', '.join(range80_100) + '[/100]'
 print(range_output)
+
+end = input()
