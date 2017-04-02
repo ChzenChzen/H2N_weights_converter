@@ -32,7 +32,7 @@ def get_suit_cards(cards_matrix):
 
 def get_pair_cards(cards_matrix):
     """returns list of pair cards"""
-    pairs = [cards_matrix[i][i] for i in range(len(cards_matrix))]  # take only values of pair cards from matrix
+    pairs = [cards_matrix[i][i] for i in range(13)]  # take only values of pair cards from matrix
     return pairs
 
 
@@ -43,11 +43,33 @@ def convert_into_percents(cards_range):
     return percent_values
 
 
-def add_offsuit_cards(offsuit_values, cards_matrix):
-    """add offsuit cards in empty cards matrix"""
-    for n in range(13):
-        cards_matrix.append(offsuit_values[:n])
+def show_matrix(matrix):
+    for row in matrix:
+        print(str(row) + "\n")
+
+
+def add_offsuit_cards_percents(offsuit_values, cards_matrix):
+    """add offsuit cards in cards matrix"""
+    n = 0
+    for row in cards_matrix:
+        row[:n] = offsuit_values[:n]
         del offsuit_values[:n]
+        n += 1
+
+
+def add_pair_cards(pair_values, cards_matrix):
+    """add pair cards in cards matrix"""
+    for n in range(13):
+        cards_matrix[n][n] = pair_values[n]
+
+
+def add_suit_cards_percents(suit_values, cards_matrix):
+    """add suit cards in cards matrix"""
+    n = 1
+    for row in cards_matrix:
+        row[n:] = suit_values[:n]
+        del suit_values[:n]
+        n += 1
 
 
 def convert_into_crev_format():
@@ -60,12 +82,16 @@ def write_crev_format_in_excel():
     pass
 
 
-weights = h2n_text_parser("input.txt")
-matrix = []
+data = h2n_text_parser("input.txt")
+matrix = [['' for x in range(13)] for x in range(13)]  # create empty matrix 13*13
+offsuit_cards_in_percent = convert_into_percents(get_offsuit_cards(data))
+pair_cards_in_percent = convert_into_percents(get_pair_cards(data))
+suit_cards_in_percent = convert_into_percents(get_suit_cards(data))
 
-offsuit_cards_in_percent = convert_into_percents(get_offsuit_cards(weights))
-# print(convert_into_percents(pair_cards(weights)))
-# print(convert_into_percents(suit_cards(weights)))
+print("p: " + str(pair_cards_in_percent))
+print("o: " + str(offsuit_cards_in_percent))
 
-add_offsuit_cards(offsuit_cards_in_percent, matrix)
-print(matrix)
+add_offsuit_cards_percents(offsuit_cards_in_percent, matrix)
+add_pair_cards(pair_cards_in_percent, matrix)
+add_suit_cards_percents(suit_cards_in_percent, matrix)
+show_matrix(matrix)
