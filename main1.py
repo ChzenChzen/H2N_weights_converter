@@ -46,16 +46,6 @@ def show_matrix(matrix):
         print(str(row) + "\n")
 
 
-def convert_into_crev_format():
-    """rounds weights of percents  into crev format(5 weights)"""
-    pass
-
-
-def write_crev_format_in_excel():
-    """writes crev weighted data in excel's table for handy usage"""
-    pass
-
-
 def pair_cards(values):
     """does dict of pair cards with value"""
     pair_cards_val_in_percent = convert_into_percents(get_pair_cards(values))  # list of pair cards
@@ -107,21 +97,21 @@ def suit_cards(values):
         suit_cards_dict[suit_card_label] = suit_cards_val_in_percent[index]
     return suit_cards_dict
 
-data = h2n_text_parser("input.txt")
+data = h2n_text_parser("input1.txt")
 
 all_cards = dict(**pair_cards(data), **offsuit_cards(data), **suit_cards(data))
 range0_19, range20_39, range40_59, range60_79, range80_100 = [], [], [], [], []
 
 for key, value in all_cards.items():
-    if value < 0.2:
+    if 0.2 < value < 0.30:
         range0_19.append(key)
-    elif 0.2 <= value < 0.4:
+    elif 0.30 <= value < 0.50:
         range20_39.append(key)
-    elif 0.4 <= value < 0.6:
+    elif 0.50 <= value < 0.70:
         range40_59.append(key)
-    elif 0.6 <= value < 0.8:
+    elif 0.70 <= value < 0.90:
         range60_79.append(key)
-    elif 0.8 <= value <= 1:
+    elif 0.90 <= value <= 1:
         range80_100.append(key)
 
 range_output = '[20]' + ', '.join(range0_19) + '[/20],' + '[40]' + ', '.join(
